@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +52,6 @@ public class FlightController {
 	    }
 	    
 	    @GetMapping("/test")
-	    @PreAuthorize("hasRole('USER')")
 	    public String test() {
 	        return "Funciona!";
 	    }
@@ -65,18 +64,26 @@ public class FlightController {
 	    }
 	    
 	    @Operation(summary = "Busca vuelos por numero")
-	    @GetMapping("/by-flightNumber/{flightNumber}")
-	    public Flight getFlightByNumber(@PathVariable String flightNumber) {
+	    @GetMapping("/by-flightNumber")
+	    public Flight getFlightByNumber(@Parameter (description = "Numero de vuelo") @RequestParam String flightNumber) {
 	    	return flightRepository.findByFlightNumber(flightNumber);
 	    }
 	    
 	    @Operation(summary = "Busca vuelos por origen y destino", description = "Filtra por origen y destino")
-	    @GetMapping
+	    @GetMapping		
 	    public List<Flight> searchFlights(
 	        @Parameter(description = "Ciudad de origen") @RequestParam String origin,
 	        @Parameter(description = "Ciudad de destino") @RequestParam String destination
 	    ) { 
 	    
 	    	return flightRepository.findByOriginAndDestination(origin, destination);
+	    }
+	    
+	    @Operation(summary = "Elimina vuelos por numero")
+	    @DeleteMapping("/delete-byNumber")
+	    public ResponseEntity<String> deleteFlight(@Parameter (description = "Numero de vuelo")@RequestParam String flightNumber) {
+	    	flightRepository.deleteByNumber(flightNumber);
+	    	
+	    	return ResponseEntity.ok("Vuelo Eliminado");
 	    }
 }

@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.transport.ProxyProvider;
 
-
 @Configuration
 public class WeatherConfig {
 

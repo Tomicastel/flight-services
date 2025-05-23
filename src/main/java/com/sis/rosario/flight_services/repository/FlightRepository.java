@@ -25,4 +25,11 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
                 .collect(Collectors.toList());
     }
     
+    default void deleteByNumber(String flightNumber) {
+    
+    	Flight flight = findByFlightNumber(flightNumber);
+    	
+    	delete(flight);
+    }
+    
 }
