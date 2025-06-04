@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sis.rosario.flight_services.dto.FlightState;
 import com.sis.rosario.flight_services.service.OpenSkyService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api/opensky")
+@Tag(name = "Open Sky API", description = "Vuelos en tiempo real")
 public class OpenSkyController {
 
     private final OpenSkyService openSkyService;

@@ -46,12 +46,12 @@ public class OpenSkyService {
                 safeGetDouble(state, 6), // latitude
                 safeGetDouble(state, 9)  // velocity
             );
-        }
+    }
 
-        // Método helper para manejar valores nulos
-        private double safeGetDouble(List<Object> state, int index) {
-            if (index >= state.size()) return 0.0; // Índice fuera de rango
-            Object value = state.get(index);
-            return (value instanceof Number) ? ((Number) value).doubleValue() : 0.0;
-        }
+    // Método helper para manejar valores nulos
+    private double safeGetDouble(List<Object> state, int index) {
+        if (index >= state.size()) return 0.0; // Índice fuera de rango
+        Object value = state.get(index);
+        return (value instanceof Number) ? ((Number) value).doubleValue() : 0.0;
+    }
 }

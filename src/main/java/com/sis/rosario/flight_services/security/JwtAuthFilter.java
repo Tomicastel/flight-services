@@ -51,7 +51,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 Claims claims = jwtUtils.extractAllClaims(jwt);
                 
                 // Extracción CORRECTA de roles
-                List<String> roles = claims.get("roles", List.class);
+                @SuppressWarnings("unchecked")
+				List<String> roles = claims.get("roles", List.class);
                 Collection<SimpleGrantedAuthority> authorities = roles.stream()
                         .map(SimpleGrantedAuthority::new)
                         .toList();

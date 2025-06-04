@@ -1,7 +1,5 @@
 package com.sis.rosario.flight_services.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import com.sis.rosario.flight_services.dto.LoginRequest;
+import com.sis.rosario.flight_services.dto.RegisterRequest;
 import com.sis.rosario.flight_services.model.User;
 import com.sis.rosario.flight_services.repository.UserRepository;
 import com.sis.rosario.flight_services.security.JwtUtils;
@@ -65,31 +65,3 @@ public class AuthController {
     
 
 }
-
-// DTOs
-record LoginRequest(String username, String password) {
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-}
-
-record RegisterRequest(String username, String password, List<String> roles) {
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getPassword() {
-		return password;
-	}	
-}
-
-
-
-
-
